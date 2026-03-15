@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7桁検索アプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>7桁検索アプリ</h1>
+      <p class="subtitle">Xの投稿テキストを貼り付けて、FC2動画の7桁IDを抽出・検索</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <label for="text-input">テキストを貼り付け</label>
+        <textarea
+          id="text-input"
+          placeholder="Xの投稿テキストをここに貼り付けてください&#10;例: 神番号 1234567 おすすめ"
+          rows="6"
+        ></textarea>
+        <div class="input-buttons">
+          <button id="extract-btn" type="button">7桁の数字を抽出</button>
+          <button id="clear-btn" type="button">テキストを消去</button>
+        </div>
+      </section>
+
+      <section class="results-section" id="results-section" hidden>
+        <h2>抽出されたFC2動画ID（7桁）</h2>
+        <p class="count" id="count"></p>
+        <ul id="results-list"></ul>
+      </section>
+
+      <section class="empty-state" id="empty-state">
+        <p>テキストを貼り付けて「7桁の数字を抽出」をクリックしてください</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

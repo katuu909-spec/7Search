@@ -1,0 +1,8 @@
+{
+  "name": "search-7digit",
+  "version": "1.0.0",
+  "description": "X投稿から7桁の数字を抽出してWeb検索するアプリ",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

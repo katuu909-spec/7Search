@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "7桁検索アプリ",
+  "version": "1.0.0",
+  "description": "Xの投稿テキストからFC2動画の7桁IDを抽出・検索",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "7桁検索アプリ"
+  },
+  "permissions": ["tabs"]
+}
