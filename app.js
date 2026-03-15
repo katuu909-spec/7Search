@@ -27,8 +27,16 @@
   function searchOnGoogle(number) {
     // FC2動画に関連する検索結果をヒットさせる
     const query = `FC2 ${number}`;
-    const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-    window.open(url, '_blank');
+    const searchPath = `/search?q=${encodeURIComponent(query)}`;
+    // googlechromes:// でChromeで開く（iPadのSafari等から開く場合）
+    const chromeUrl = `googlechromes://www.google.com${searchPath}`;
+    const a = document.createElement('a');
+    a.href = chromeUrl;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   function renderResults(numbers) {
