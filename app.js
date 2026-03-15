@@ -28,7 +28,7 @@
     // FC2動画に関連する検索結果をヒットさせる
     const query = `FC2 ${number}`;
     const searchPath = `/search?q=${encodeURIComponent(query)}`;
-    // googlechromes:// でChromeで開く（iPadのSafari等から開く場合）
+    // googlechromes:// でSafariからでもChromeで開く
     const chromeUrl = `googlechromes://www.google.com${searchPath}`;
     const a = document.createElement('a');
     a.href = chromeUrl;
