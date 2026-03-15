@@ -24,19 +24,9 @@
     window.open(`${FC2_VIDEO_BASE}${number}`, '_blank');
   }
 
-  function searchOnGoogle(number) {
-    // FC2動画に関連する検索結果をヒットさせる
+  function getChromeSearchUrl(number) {
     const query = `FC2 ${number}`;
-    const searchPath = `/search?q=${encodeURIComponent(query)}`;
-    // googlechromes:// でSafariからでもChromeで開く
-    const chromeUrl = `googlechromes://www.google.com${searchPath}`;
-    const a = document.createElement('a');
-    a.href = chromeUrl;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    return `googlechromes://www.google.com/search?q=${encodeURIComponent(query)}`;
   }
 
   function renderResults(numbers) {
@@ -52,24 +42,24 @@
     countEl.textContent = `${numbers.length}件見つかりました`;
 
     resultsList.innerHTML = numbers
-      .map(
-        (num) => `
+      .map((num) => {
+        const chromeUrl = getChromeSearchUrl(num);
+        return `
       <li>
         <span class="number">${num}</span>
         <div class="btn-group">
           <button type="button" class="search-btn fc2-btn" data-number="${num}">FC2動画</button>
-          <button type="button" class="search-btn google-btn" data-number="${num}">Google検索</button>
+          <a href="${chromeUrl}" class="search-btn google-btn" target="_blank" rel="noopener">Google検索</a>
         </div>
       </li>
-    `
-      )
+    `;
+      })
       .join('');
 
     resultsList.querySelectorAll('.fc2-btn').forEach((btn) => {
-      btn.addEventListener('click', () => openFc2Video(btn.dataset.number));
-    });
-    resultsList.querySelectorAll('.google-btn').forEach((btn) => {
-      btn.addEventListener('click', () => searchOnGoogle(btn.dataset.number));
+      if (btn.tagName === 'BUTTON') {
+        btn.addEventListener('click', () => openFc2Video(btn.dataset.number));
+      }
     });
   }
 
