@@ -42,27 +42,22 @@
     countEl.textContent = `${numbers.length}件見つかりました`;
 
     resultsList.innerHTML = numbers
-      .map(
-        (num) => `
+      .map((num) => {
+        const searchUrl = getGoogleSearchUrl(num);
+        return `
       <li>
         <span class="number">${num}</span>
         <div class="btn-group">
           <button type="button" class="search-btn fc2-btn" data-number="${num}">FC2動画</button>
-          <button type="button" class="search-btn google-btn" data-number="${num}">Google検索</button>
+          <a href="${searchUrl}" class="search-btn google-btn" target="_blank" rel="noopener noreferrer">Google検索</a>
         </div>
       </li>
-    `
-      )
+    `;
+      })
       .join('');
 
     resultsList.querySelectorAll('.fc2-btn').forEach((btn) => {
       btn.addEventListener('click', () => openFc2Video(btn.dataset.number));
-    });
-    resultsList.querySelectorAll('.google-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const url = getGoogleSearchUrl(btn.dataset.number);
-        window.open(url, '_blank', 'noopener,noreferrer');
-      });
     });
   }
 
